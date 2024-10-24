@@ -8,6 +8,8 @@ const Login = () => {
         e.preventDefault()
         // console.log("Form Submitted")
         // console.log(email, password)
+        setEmail("")
+        setPassword("")
     }
 
     return (
