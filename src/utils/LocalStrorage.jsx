@@ -37,7 +37,7 @@ const employees = [
             { "active": false, "newTask": true, "completed": false, "failed": false, "taskTitle": "Client Feedback Analysis", "taskDescription": "Analyze feedback received from clients.", "taskDate": "2024-10-22", "category": "Client Relations" }
         ],
         "firstName": "Jane",
-        "taskCount": { "active": 4, "newTask": 3, "completed": 4, "failed": 1 }
+        "taskCount": { "active": 4, "newTask": 3, "completed": 3, "failed": 1 }
     },
     {
         "id": "3",
@@ -105,6 +105,7 @@ const admin =[
     {
         "id": "1",
         "name": "Admin",
+        "firstName": "Admin",
         "email": "admin@example.com",
         "password": "123"
     }
