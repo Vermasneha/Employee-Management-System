@@ -117,4 +117,6 @@ export const setLocalStroage= ()=> {
 export const getLocalStroage= ()=> {
     const employees = JSON.parse(localStorage.getItem('employees'))
     const admin = JSON.parse(localStorage.getItem('admin'))
+
+    return {employees, admin}
 }
