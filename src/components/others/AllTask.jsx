@@ -1,12 +1,30 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { AuthContext } from '../../context/AuthProvider'
 
 const AllTask = () => {
+
+  const authData = useContext(AuthContext)
+
   return (
-    <div className='bg-[#1C1C1C] p-5 mt-5 rounded h-56 overflow-auto'>
-      <div className='py-2 px-4 bg-red-400 flex justify-between mb-2'>
-        <h2>Sarthak</h2>
-        <h3>Make Financial Report of last sales month</h3>
-        <h5>Status</h5>
+    <div className='bg-[#1C1C1C] p-5 mt-5 rounded h-56'>
+      <div className='mb-2 py-2 px-4 flex justify-between rounded'>
+        <h2 className='text-lg font-medium w-1/5'>Employee Name</h2>
+        <h3 className='text-lg font-medium w-1/5'>New Task</h3>
+        <h3 className='text-lg font-medium w-1/5'>Active Task</h3>
+        <h3 className='text-lg font-medium w-1/5'>Completed Task</h3>
+        <h3 className='text-lg font-medium w-1/5'>Failed Task</h3>
+      </div>
+
+      <div id='noscrollbar' className='h-[80%] overflow-auto'>
+        {authData.employees.map((elem)=>{
+          return <div className='border-2 border-emerald-500 py-2 px-4 flex justify-between mb-2'>
+          <h2 className='text-lg font-medium w-1/5'>{elem.firstName}</h2>
+          <h3 className='text-lg font-medium w-1/5 text-blue-600'>{elem.taskCount.newTask}</h3>
+          <h3 className='text-lg font-medium w-1/5 text-yellow-400'>{elem.taskCount.active}</h3>
+          <h3 className='text-lg font-medium w-1/5 text-green-600'>{elem.taskCount.completed}</h3>
+          <h3 className='text-lg font-medium w-1/5 text-red-600'>{elem.taskCount.failed}</h3>
+        </div>
+        })}
       </div>
     </div>
   )

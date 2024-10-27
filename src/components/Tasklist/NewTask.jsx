@@ -18,7 +18,7 @@ const NewTask = ({data}) => {
             {data.taskDescription}
         </p>
         <div className='mt-4'>
-            <button className='w-full'>Accept Task</button>
+            <button className='w-full bg-emerald-500'>Accept Task</button>
         </div>
     </div>
   )
