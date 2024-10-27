@@ -16,13 +16,13 @@ const AllTask = () => {
       </div>
 
       <div id='noscrollbar' className='h-[80%] overflow-auto'>
-        {authData.employees.map((elem)=>{
+        {authData.employees.map((elem, idx)=>{
           return <div className='border-2 border-emerald-500 py-2 px-4 flex justify-between mb-2'>
-          <h2 className='text-lg font-medium w-1/5'>{elem.firstName}</h2>
-          <h3 className='text-lg font-medium w-1/5 text-blue-600'>{elem.taskCount.newTask}</h3>
-          <h3 className='text-lg font-medium w-1/5 text-yellow-400'>{elem.taskCount.active}</h3>
-          <h3 className='text-lg font-medium w-1/5 text-green-600'>{elem.taskCount.completed}</h3>
-          <h3 className='text-lg font-medium w-1/5 text-red-600'>{elem.taskCount.failed}</h3>
+          <h2 key={idx} className='text-lg font-medium w-1/5'>{elem.firstName}</h2>
+          <h3 key={idx} className='text-lg font-medium w-1/5 text-blue-600'>{elem.taskCount.newTask}</h3>
+          <h3 key={idx} className='text-lg font-medium w-1/5 text-yellow-400'>{elem.taskCount.active}</h3>
+          <h3 key={idx} className='text-lg font-medium w-1/5 text-green-600'>{elem.taskCount.completed}</h3>
+          <h3 key={idx} className='text-lg font-medium w-1/5 text-red-600'>{elem.taskCount.failed}</h3>
         </div>
         })}
       </div>
