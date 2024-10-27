@@ -4,7 +4,7 @@ const AcceptTask = ({data}) => {
   return (
     <div className='flex-shrink-0 h-full w-[300px] p-5 bg-yellow-400 rounded-xl '>
         <div className='flex justify-between items-center'>
-            <h3 className='bg-yellow-600 px-3 py-1 rounded text-sm'>
+            <h3 className='bg-blue-600 px-3 py-1 rounded text-sm'>
                 {data.category}
             </h3>
             <h4 className='text-sm'>
