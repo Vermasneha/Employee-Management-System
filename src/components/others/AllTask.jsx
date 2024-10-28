@@ -5,9 +5,9 @@ const AllTask = () => {
 
   const [userData, setUserData] = useContext(AuthContext)
 
-  useEffect(()=>{
-    setUserData(userData)
-  },[userData])
+  // useEffect(()=>{
+  //   setUserData(userData)
+  // },[userData])
 
   return (
     <div className='bg-[#1C1C1C] p-5 mt-5 rounded h-56'>

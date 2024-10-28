@@ -14,6 +14,11 @@ const CreateTask = () => {
         e.preventDefault();
 
         // form submission logic here
+        // Check if any field is empty
+        if (!taskTitle || !taskDate || !assignedTo || !category || !taskDescription) {
+            alert('Please fill in all fields before submitting.');
+            return;
+        }
         // console.log(taskTitle, taskDate, assignedTo, category, taskDescription)
         
         const newTask = {
