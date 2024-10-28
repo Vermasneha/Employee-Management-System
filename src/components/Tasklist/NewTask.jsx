@@ -4,6 +4,7 @@ import { AuthContext } from "../../context/AuthProvider";
 const NewTask = ({ data, taskKey }) => {
   const [userData, setUserData] = useContext(AuthContext);
   const [tasks, setTasks] = useState([]);
+  const [employeeTaskCount, setEmployeeTaskCount] = useState({})
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("loggedInUser"));
@@ -12,6 +13,8 @@ const NewTask = ({ data, taskKey }) => {
       const employee = userData.find((e) => e.firstName === firstName);
       if (employee) {
         setTasks([...employee.tasks]);
+        // console.log(employee.taskCount)
+        setEmployeeTaskCount({...employee.taskCount})
       }
     }
   }, [userData]);
@@ -21,9 +24,12 @@ const NewTask = ({ data, taskKey }) => {
     const firstName = user.data.firstName;
     const employee = userData.find((e) => e.firstName === firstName);
 
+    const countToBeUpdated = {...employeeTaskCount}
+    countToBeUpdated.active += 1
+
     const taskToUpdate = [...tasks];
     // console.log(taskKey)
-    console.log(taskToUpdate[taskKey]);
+    // console.log(taskToUpdate[taskKey]);
 
     taskToUpdate[taskKey].active = true;
     taskToUpdate[taskKey].completed = false;
@@ -36,6 +42,7 @@ const NewTask = ({ data, taskKey }) => {
 
     const updatedEmployee = {
       ...employee,
+      taskCount: countToBeUpdated,
       tasks: tasks,
     };
     // console.log(updatedEmployee)
@@ -45,6 +52,7 @@ const NewTask = ({ data, taskKey }) => {
       updatedEmployee,
       ...userData.filter((e) => e.firstName !== firstName)
     ];
+    // console.log(data)
     setUserData(data);
   };
 

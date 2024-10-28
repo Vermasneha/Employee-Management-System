@@ -5,8 +5,6 @@ import AdminDashboard from './components/Dashboard/Admin.Dashboard'
 import { getLocalStroage, setLocalStroage } from './utils/LocalStrorage'
 import { AuthContext } from './context/AuthProvider'
 
-// Tasks:- 1) task list counter dynamic redering
-
 const App = () => {
   const [user, setUser]= useState(null)
   const[loggedInUserData, setLoggedInUserData]= useState(null)

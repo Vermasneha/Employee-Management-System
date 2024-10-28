@@ -4,6 +4,7 @@ import { AuthContext } from "../../context/AuthProvider";
 const ActiveTask = ({ data, taskKey }) => {
   const [userData, setUserData] = useContext(AuthContext);
   const [tasks, setTasks] = useState([]);
+  const [employeeTaskCount, setEmployeeTaskCount] = useState({})
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("loggedInUser"));
@@ -12,6 +13,7 @@ const ActiveTask = ({ data, taskKey }) => {
       const employee = userData.find((e) => e.firstName === firstName);
       if (employee) {
         setTasks([...employee.tasks]);
+        setEmployeeTaskCount({...employee.taskCount})
       }
     }
   }, [userData]);
@@ -19,11 +21,15 @@ const ActiveTask = ({ data, taskKey }) => {
   const changeToCompleted = (tasks, taskKey) => {
     const user = JSON.parse(localStorage.getItem("loggedInUser"));
     const firstName = user.data.firstName;
-    const employee = userData.find((e) => e.firstName === firstName);    
+    const employee = userData.find((e) => e.firstName === firstName);  
+    
+    const countToBeUpdated = {...employeeTaskCount}
+    countToBeUpdated.completed += 1
+    countToBeUpdated.active -= 1
     
     const taskToUpdate = [...tasks]
     // console.log(taskKey)
-    console.log(taskToUpdate[taskKey])
+    // console.log(taskToUpdate[taskKey])
 
     taskToUpdate[taskKey].active = false 
     taskToUpdate[taskKey].completed= true 
@@ -36,6 +42,7 @@ const ActiveTask = ({ data, taskKey }) => {
 
     const updatedEmployee = {
         ...employee,
+        taskCount: countToBeUpdated,
         tasks: tasks,
     };
     // console.log(updatedEmployee)
@@ -48,7 +55,11 @@ const ActiveTask = ({ data, taskKey }) => {
   const changeToFailed = (tasks, taskKey) => {
     const user = JSON.parse(localStorage.getItem("loggedInUser"));
     const firstName = user.data.firstName;
-    const employee = userData.find((e) => e.firstName === firstName);    
+    const employee = userData.find((e) => e.firstName === firstName);
+    
+    const countToBeUpdated = {...employeeTaskCount}
+    countToBeUpdated.failed += 1
+    countToBeUpdated.active -= 1
     
     const taskToUpdate = [...tasks]
     console.log(taskToUpdate[taskKey])
@@ -62,6 +73,7 @@ const ActiveTask = ({ data, taskKey }) => {
 
     const updatedEmployee = {
         ...employee,
+        taskCount: countToBeUpdated,
         tasks: tasks,
     };
 

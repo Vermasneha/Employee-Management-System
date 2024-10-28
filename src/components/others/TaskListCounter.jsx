@@ -13,7 +13,7 @@ const TaskListCounter = ({data}) => {
       </div>
       <div className='rounded-xl w-[45%] px-9 py-6 bg-green-400'>
         <h2 className='text-3xl font-semibold'>{data.taskCount.active}</h2>
-        <h3 className='text-xl font-medium'>Accepted Tasks</h3>
+        <h3 className='text-xl font-medium'>Active Tasks</h3>
       </div>
       <div className='rounded-xl w-[45%] px-9 py-6 bg-yellow-400'>
         <h2 className='text-3xl font-semibold'>{data.taskCount.failed}</h2>
