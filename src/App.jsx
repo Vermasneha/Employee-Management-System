@@ -5,10 +5,13 @@ import AdminDashboard from './components/Dashboard/Admin.Dashboard'
 import { getLocalStroage, setLocalStroage } from './utils/LocalStrorage'
 import { AuthContext } from './context/AuthProvider'
 
-const App = () => {  
+// Tasks:- 1) create task 2) task list counter dynamic redering 3) active task to complete task or faled task
+
+const App = () => {
   const [user, setUser]= useState(null)
   const[loggedInUserData, setLoggedInUserData]= useState(null)
-  const authData = useContext(AuthContext)
+  
+  const [userData, setUserData] = useContext(AuthContext)
   // console.log(authData)
 
   useEffect(() => {
@@ -27,8 +30,8 @@ const App = () => {
     if(email == 'admin@example.com' && password == '123'){
       setUser('admin')
       localStorage.setItem('loggedInUser', JSON.stringify({role:'admin'}))
-    }else if(authData){
-      const employee = authData.employees.find( (e) => email == e.email && password == e.password )
+    }else if(userData){
+      const employee = userData.find( (e) => email == e.email && password == e.password )
       if(employee){
         setUser('employee')
         setLoggedInUserData(employee)
