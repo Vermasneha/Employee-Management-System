@@ -5,7 +5,7 @@ import AdminDashboard from './components/Dashboard/Admin.Dashboard'
 import { getLocalStroage, setLocalStroage } from './utils/LocalStrorage'
 import { AuthContext } from './context/AuthProvider'
 
-// Tasks:- 1) create task 2) task list counter dynamic redering 3) active task to complete task or faled task
+// Tasks:- 1) task list counter dynamic redering
 
 const App = () => {
   const [user, setUser]= useState(null)
