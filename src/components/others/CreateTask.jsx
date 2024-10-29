@@ -45,8 +45,6 @@ const CreateTask = () => {
                 // console.log(elem)
                 
                 elem.taskCount.newTask = elem.taskCount.newTask + 1
-            } else {
-                alert("Invalid assignedTo")
             }
         })
 
