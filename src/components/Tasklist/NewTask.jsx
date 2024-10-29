@@ -60,7 +60,6 @@ const NewTask = ({ data, taskKey }) => {
   const ForwardTask= (e, tasks, taskKey)=>{
     e.preventDefault()
     // console.log(forwardTo)
-    // 1) task forward karna hai
 
     const user = JSON.parse(localStorage.getItem("loggedInUser"));
     const firstName = user.data.firstName;
@@ -113,6 +112,7 @@ const NewTask = ({ data, taskKey }) => {
     // console.log(newTask)
 
     const data1 = data
+    let taskAssigned = false;
     // console.log(data1)
     
     data1.forEach(function(elem){
@@ -124,11 +124,18 @@ const NewTask = ({ data, taskKey }) => {
             // console.log(elem)
             
             elem.taskCount.newTask = elem.taskCount.newTask + 1
+            taskAssigned = true;
         }
     })
 
-    // console.log(data1)
-    setUserData(data1)
+    if (!taskAssigned) {
+        alert(`No employee found with the name "${forwardTo}". Please check and try again.`);
+        return;
+    }else {
+      setUserData(data1)
+    }
+
+    // console.log(data1)    
   }
 
   return (

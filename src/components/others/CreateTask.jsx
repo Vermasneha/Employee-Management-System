@@ -34,6 +34,7 @@ const CreateTask = () => {
         // console.log(newTask)
 
         const data = userData
+        let taskAssigned = false;
         // console.log(data)
         
         data.forEach(function(elem){
@@ -45,10 +46,16 @@ const CreateTask = () => {
                 // console.log(elem)
                 
                 elem.taskCount.newTask = elem.taskCount.newTask + 1
+                taskAssigned = true;
             }
         })
 
-        setUserData(data)
+        if (!taskAssigned) {
+            alert(`No employee found with the name "${assignedTo}". Please check and try again.`);
+            return;
+        }else {
+            setUserData(data)
+        }    
 
         // Reset form fields after submission
         setTaskTitle('');
