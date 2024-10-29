@@ -5,6 +5,7 @@ const NewTask = ({ data, taskKey }) => {
   const [userData, setUserData] = useContext(AuthContext);
   const [tasks, setTasks] = useState([]);
   const [employeeTaskCount, setEmployeeTaskCount] = useState({})
+  const [forwardTo, setForwardTo] = useState('')
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("loggedInUser"));
@@ -56,6 +57,80 @@ const NewTask = ({ data, taskKey }) => {
     setUserData(data);
   };
 
+  const ForwardTask= (e, tasks, taskKey)=>{
+    e.preventDefault()
+    // console.log(forwardTo)
+    // 1) task forward karna hai
+
+    const user = JSON.parse(localStorage.getItem("loggedInUser"));
+    const firstName = user.data.firstName;
+    const employee = userData.find((e) => e.firstName === firstName);
+
+    const countToBeUpdated = {...employeeTaskCount}
+    countToBeUpdated.newTask -= 1
+
+    const taskToUpdate = [...tasks];
+    const taskToforward = taskToUpdate[taskKey]
+    // console.log(taskToforward)
+    // console.log(taskKey)
+    // console.log(taskToUpdate[taskKey]);
+
+    taskToUpdate[taskKey].active = false;
+    taskToUpdate[taskKey].completed = false;
+    taskToUpdate[taskKey].newTask = false;
+    taskToUpdate[taskKey].failed = false;
+    taskToUpdate[taskKey].forwarded = true;
+    // console.log(taskToUpdate[taskKey])
+
+    taskToUpdate[taskKey].forwardedTo = forwardTo;
+
+    setTasks(taskToUpdate);
+    // console.log(tasks);
+
+    const updatedEmployee = {
+      ...employee,
+      taskCount: countToBeUpdated,
+      tasks: tasks,
+    };
+    // console.log(updatedEmployee)
+    // console.log([updatedEmployee,...userData.filter((e) => e.firstName!== firstName)])
+
+    const data = [
+      updatedEmployee,
+      ...userData.filter((e) => e.firstName !== firstName)
+    ];
+    // console.log(data)
+    // setUserData(data)
+    
+    // conditional check
+
+    const newTask = {
+      ...taskToforward,
+      newTask: true,
+      forwarded: false,
+      forwardedBy: firstName,
+    }
+    // console.log(newTask)
+
+    const data1 = data
+    // console.log(data1)
+    
+    data1.forEach(function(elem){
+        // console.log(elem.firstName)
+        if ( forwardTo == elem.firstName ) {
+            // console.log(elem)
+            
+            elem.tasks.push(newTask)
+            // console.log(elem)
+            
+            elem.taskCount.newTask = elem.taskCount.newTask + 1
+        }
+    })
+
+    // console.log(data1)
+    setUserData(data1)
+  }
+
   return (
     <div className="flex-shrink-0 h-full w-[300px] p-5 bg-blue-400 rounded-xl ">
       <div className="flex justify-between items-center">
@@ -73,6 +148,30 @@ const NewTask = ({ data, taskKey }) => {
         >
           Accept Task
         </button>
+      {data.forwardedBy?<div className="mt-2 w-full bg-puple-600"> Forwarded by: {data.forwardedBy}</div>: ''}      
+      </div>
+      <div className="mt-2">
+      <form 
+          onSubmit={(e) => ForwardTask(e, tasks, taskKey)}
+          className='flex flex-wrap w-full items-start justify-between'
+      >
+          <div className='w-1/2'>
+            <input 
+                className='text-sm px-2 py-1 w-4/5 rounded outline-none bg-white text-black border-[1px] border-gray-400 mb-4' 
+                type="text" 
+                placeholder='forwardTo' 
+                value={forwardTo}
+                onChange={(e) => setForwardTo(e.target.value)}
+            />              
+          </div>
+          <div className='w-1/2 flex flex-col items-start'>  
+            <button
+            className="w-full bg-purple-600"
+            >
+            Forward Task
+            </button>
+          </div>
+      </form>
       </div>
     </div>
   );
