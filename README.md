@@ -36,11 +36,9 @@ Start the server
 
 You can find login credentials in localStorage.jsx to test the project.
 
-### Create Task
-
-### Forward Task
-
-### Change Task Status
+[Create Task](./demo/CreateTask.mp4)
+[Forward Task](./demo/ForwardTask.mp4)
+[Change Task Status](./demo/StausUpdate.mp4)
 
 ## Features
 - Admin and user roles with distinct privileges
