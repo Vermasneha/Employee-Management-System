@@ -10,7 +10,7 @@ Javascript, React, Context Api, Tailwind css and Local Storage handling...
 Clone the project
 
 ```bash
-  https://github.com/malhotraarshdeepsingh/Employee-Management-System
+  https://github.com//Employee-Management-System
 ```
 
 Go to the project directory
